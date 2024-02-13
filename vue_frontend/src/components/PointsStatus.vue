@@ -44,11 +44,11 @@ watch(() => rewardStore.redeemedIds, async (redeemed, _) => {
   <div class="container" v-show="!rewardStore.submitInProgress">
     <div class="row justify-content-around">
       <div class="col-4 text-center card bg-light p-0 h5">
-        <div class="card-header">Points Redeemed</div>
+        <div class="card-header">Ponts Redeemed</div>
         <div class="card-body">{{ rewardStore.pointsRedeemed }}</div>
       </div>
       <div class="col-4 text-center card bg-light p-0 h5">
-        <div class="card-header">Points Remaining</div>
+        <div class="card-header">Ponts Remaining</div>
         <div class="card-body" :class="{ 'text-danger': remainingPoints < 0 }">
           {{ remainingPoints }}
         </div>

@@ -24,7 +24,7 @@ repos:
     hooks:
       - id: prettier
         args: ['--tab-width', '2', '--single-quote']
-        exclude: 'holistiplan/templates/'
+        types_or: [css, javascript]
 
   - repo: https://github.com/adamchainz/django-upgrade
     rev: '1.15.0'

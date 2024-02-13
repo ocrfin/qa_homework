@@ -11,22 +11,13 @@
   <div class="mt-4">
     <div
       id="points-status"
-      {#
-    pass
-    root
-    properties
-    via
-    the
-    dataset
-    #}
+      {# pass root properties via the dataset #}
       data-points-available="{{ redeemable_points }}"
       data-claim-url="{% url 'rewards:claim' %}"
       >
-      {# 'djangoSlots' can be addressed by name and used as content in Vue
-    components #}
+      {# 'djangoSlots' can be addressed by name and used as content in Vue components #}
       <h4 class="text-center mb-5" data-django-slot="message">You've earned DjangoCon rewards!</h4>
-      {# They can include template logic and may be teleported anywhere on the
-    page #}
+      {# They can include template logic and may be teleported anywhere on the page #}
       <p class="text-muted p-3" data-django-slot="disclaimer">
         Welcome, {{ request.user }}. This app is for demonstration purposes only.
         Rewards are entirely fictitious and may not be redeemed.
@@ -55,7 +46,6 @@
 {% endblock content %}
 {% block inline_javascript %}
   <script type="module" crossorigin src="{% vue_bundle_url 'reward' %}"></script>
-  {# 'provide" strings which can 'injected' throughout the Vue app, including from
-within a pinia store #} {% url 'rewards:bonus' as addPointsUrl %} {% vue_provide
-  'addPointsUrl' addPointsUrl %}
+  {# 'provide" strings which can 'injected' throughout the Vue app, including from within a pinia store #}
+  {% url 'rewards:bonus' as addPointsUrl %} {% vue_provide 'addPointsUrl' addPointsUrl %}
 {% endblock inline_javascript %}

@@ -10,7 +10,7 @@ services:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
     image: holistiplan_local_django
-    container_name: holistiplan_local_django
+    container_name: django
     depends_on:
       - postgres
       - redis
@@ -28,38 +28,25 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: holistiplan_production_postgres
-    container_name: holistiplan_local_postgres
+    container_name: postgres
     volumes:
       - holistiplan_local_postgres_data:/var/lib/postgresql/data
       - holistiplan_local_postgres_data_backups:/backups
+    ports:
+      - "5432:5432"
     env_file:
       - ./.envs/.local/.postgres
 
-#  docs:
-#    image: holistiplan_local_docs
-#    container_name: holistiplan_local_docs
-#    build:
-#      context: .
-#      dockerfile: ./compose/local/docs/Dockerfile
-#    env_file:
-#      - ./.envs/.local/.django
-#    volumes:
-#      - ./docs:/docs:z
-#      - ./config:/app/config:z
-#      - ./holistiplan:/app/holistiplan:z
-#      - ./rewards:/app/rewards:z
-#    ports:
-#      - '9000:9000'
-#    command: /start-docs
-
   redis:
     image: redis:6
-    container_name: holistiplan_local_redis
+    container_name: redis
+    ports:
+      - "6379:6379"
 
   celeryworker:
     <<: *django
     image: holistiplan_local_celeryworker
-    container_name: holistiplan_local_celeryworker
+    container_name: worker
     depends_on:
       - redis
       - postgres
@@ -69,27 +56,19 @@ services:
   celerybeat:
     <<: *django
     image: holistiplan_local_celerybeat
-    container_name: holistiplan_local_celerybeat
+    container_name: celerybeat
     depends_on:
       - redis
       - postgres
     ports: []
     command: /start-celerybeat
 
-  flower:
-    <<: *django
-    image: holistiplan_local_flower
-    container_name: holistiplan_local_flower
-    ports:
-      - '5555:5555'
-    command: /start-flower
-
   node:
     build:
       context: .
       dockerfile: ./compose/local/node/Dockerfile
     image: holistiplan_local_node
-    container_name: holistiplan_local_node
+    container_name: node
     depends_on:
       - django
     volumes:
@@ -105,7 +84,7 @@ services:
       context: .
       dockerfile: ./compose/local/vite/Dockerfile
     image: my_awesome_vue_project_local_vite
-    container_name: my_awesome_vue_project_local_vite
+    container_name: vite
     depends_on:
       - django
     volumes:

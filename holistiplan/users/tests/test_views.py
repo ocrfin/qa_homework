@@ -12,11 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from holistiplan.users.forms import UserAdminChangeForm
 from holistiplan.users.models import User
 from holistiplan.users.tests.factories import UserFactory
-from holistiplan.users.views import (
-    UserRedirectView,
-    UserUpdateView,
-    user_detail_view,
-)
+from holistiplan.users.views import UserRedirectView, UserUpdateView, user_detail_view
 
 pytestmark = pytest.mark.django_db
 

@@ -1,10 +1,6 @@
 from django.urls import path
 
-from holistiplan.users.views import (
-    user_detail_view,
-    user_redirect_view,
-    user_update_view,
-)
+from holistiplan.users.views import user_detail_view, user_redirect_view, user_update_view
 
 app_name = "users"
 urlpatterns = [

@@ -42,7 +42,14 @@ module.exports = {
               },
             },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                quietDeps: true, // Suppress deprecation warnings from dependencies
+              },
+            },
+          },
         ],
       },
     ],
